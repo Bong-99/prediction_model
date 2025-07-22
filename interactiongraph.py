@@ -38,7 +38,7 @@ def plot_advanced_sunspot_visualizations(df, sunactivity_col='SUNACTIVITY',
         xs = np.linspace(data.min(), data.max(), 200)
         density = gaussian_kde(data)
 
-        axs[0, 1].hist(data, bins=hist_bins, density=True, color='skyblue', edgecolor='black', alpha=0.6)
+        axs[0, 1].hist(data, bins=hist_bins, density=True, color='gray', edgecolor='black', alpha=0.6)
         axs[0, 1].plot(xs, density(xs), color='red', linewidth=2, label='Density')
     axs[0, 1].set_title("Distribution of Sunspot Activity")
     axs[0, 1].set_xlabel("Sunspot Count")
