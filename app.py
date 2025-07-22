@@ -24,7 +24,7 @@ def plot_advanced_sunspot_visualizations(df, sunactivity_col='SUNACTIVITY'):
     fig.suptitle("Sunspots Data Advanced Visualization", fontsize=18)
 
     # (a) 전체 시계열 라인 차트
-
+    axs[0, 0].plot(df.index, df[sunactivity_col], color='blue', alpha=0.6)
     axs[0, 0].set_title("Sunspot Activity Over Time")
     axs[0, 0].set_xlabel("Year")
     axs[0, 0].set_ylabel("Sunspot Count")
@@ -35,7 +35,7 @@ def plot_advanced_sunspot_visualizations(df, sunactivity_col='SUNACTIVITY'):
     if len(data) > 0:  # 데이터가 있는지 확인
         xs = np.linspace(data.min(), data.max(), 200)
         density = gaussian_kde(data)
-
+        axs[0, 1].hist(data, bins=30, density=True, color='skyblue', alpha=0.6, edgecolor='black')
         axs[0, 1].plot(xs, density(xs), color='red', linewidth=2, label='Density')
     axs[0, 1].set_title("Distribution of Sunspot Activity")
     axs[0, 1].set_xlabel("Sunspot Count")
