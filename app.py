@@ -20,7 +20,7 @@ def load_data(file_path):
     return df
 
 def plot_advanced_sunspot_visualizations(df, sunactivity_col='SUNACTIVITY'):
-    fig, axs = plt.subplots(2, 2, figsize=(15, 12))
+    fig, axs = plt.subplots(2, 2, figsize=(16, 10))
     fig.suptitle("Sunspots Data Advanced Visualization", fontsize=18)
 
     # (a) 전체 시계열 라인 차트
@@ -75,7 +75,7 @@ def plot_advanced_sunspot_visualizations(df, sunactivity_col='SUNACTIVITY'):
     axs[1, 1].legend()
     axs[1, 1].grid(True)
 
-    plt.tight_layout(rect=[0, 0.03, 1, 0.95])
+    #plt.tight_layout(rect=[0, 0.03, 1, 0.95])
     return fig
 
 # 메인 앱
