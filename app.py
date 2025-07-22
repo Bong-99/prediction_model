@@ -35,7 +35,7 @@ def plot_advanced_sunspot_visualizations(df, sunactivity_col='SUNACTIVITY'):
     if len(data) > 0:  # 데이터가 있는지 확인
         xs = np.linspace(data.min(), data.max(), 200)
         density = gaussian_kde(data)
-        axs[0, 1].hist(data, bins=30, density=True, color='skyblue', alpha=0.6, edgecolor='black')
+        axs[0, 1].hist(data, bins=30, density=True, alpha=0.6, color='gray', label='Histogram')
         axs[0, 1].plot(xs, density(xs), color='red', linewidth=2, label='Density')
     axs[0, 1].set_title("Distribution of Sunspot Activity")
     axs[0, 1].set_xlabel("Sunspot Count")
@@ -45,11 +45,9 @@ def plot_advanced_sunspot_visualizations(df, sunactivity_col='SUNACTIVITY'):
 
     # (c) 상자 그림: 1900년~2000년
     try:
-        df_20th = df.loc["1900":"2000"]
+        df_20th = df.loc["1900":]
         if not df_20th.empty:
-            axs[1, 0].boxplot(df_20th[sunactivity_col].dropna().values, vert=False, patch_artist=True,
-                              boxprops=dict(facecolor='lightgreen', color='black'),
-                              medianprops=dict(color='darkgreen'))
+            axs[1, 0].boxplot(df_20th[sunactivity_col].dropna().values, vert=False)
 
     except:
         # 해당 기간 데이터가 없을 경우 예외 처리
