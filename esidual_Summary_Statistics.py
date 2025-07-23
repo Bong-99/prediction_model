@@ -46,7 +46,7 @@ fig1 = model.plot(forecast)
 st.pyplot(fig1)
 
 # 연간 성분 제거를 위해 'yearly' 컴포넌트를 필터링
-st.subheader("📊 Forecast Components")
+st.subheader("📊 ")
 fig_trend, ax_trend = plt.subplots(figsize=(10, 3))
 ax_trend.plot(forecast['ds'], forecast['trend'], color='blue')
 ax_trend.set_title("Trend")
