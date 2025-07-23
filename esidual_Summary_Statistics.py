@@ -23,7 +23,7 @@ st.dataframe(df.head())
 # ----------------------------------
 # [2] Prophet 모델 정의 및 학습
 # ----------------------------------
-model = Prophet()
+model = Prophet(yearly_seasonality=False)
 model.add_seasonality(name='sunspot_cycle', period=11, fourier_order=5)
 model.fit(df)
 
@@ -81,8 +81,8 @@ ax2.axhline(0, color='black', linestyle='--', linewidth=1)
 ax2.set_title("Residuals Analysis (Actual-Predicted)")
 ax2.set_xlabel("Year")
 ax2.set_ylabel("Residual")
-ax2.set_yticks(range(int(merged["residual"].min()) - 25,
-                     int(merged["residual"].max()) + 26,
+ax2.set_yticks(range(int(merged["residual"].min()),
+                     int(merged["residual"].max()),
                      25))
 ax2.grid(True)
 ax2.legend()
