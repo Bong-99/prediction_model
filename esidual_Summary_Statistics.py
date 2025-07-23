@@ -47,10 +47,6 @@ st.pyplot(fig1)
 
 # 연간 성분 제거를 위해 'yearly' 컴포넌트를 필터링
 st.subheader("📊 Forecast Components")
-fig_trend, ax_trend = plt.subplots(figsize=(10, 3))
-ax_trend.plot(forecast['ds'], forecast['trend'], color='blue')
-ax_trend.grid(True)
-st.pyplot(fig_trend)
 
 # 두 번째: Custom Seasonality (sunspot_cycle)
 fig_cycle, ax_cycle = plt.subplots(figsize=(10, 3))
