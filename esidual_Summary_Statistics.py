@@ -56,14 +56,15 @@ st.subheader("📉 Custom Plot: Actual vs Predicted with Prediction Intervals")
 
 fig3, ax = plt.subplots(figsize=(14, 6))
 ax.plot(df["ds"], df["y"], label="Actual", color='blue')
-ax.plot(forecast["ds"], forecast["yhat"], label="Predicted", color='red',linestyle='--')
+ax.plot(forecast["ds"], forecast["yhat"], label="Predicted", color='red',linestyle='--',marker='o')
 ax.fill_between(forecast["ds"], forecast["yhat_lower"], forecast["yhat_upper"],
                  color='red', alpha=0.1, label="Prediction Interval")
 ax.set_title("Sunspots: Actual vs Predicted with Prediction Intervals")
 ax.set_xlabel("Year")
-ax.set_ylabel("Sunspot Count")
+ax.set_ylabel("Sunspot Activity")
 ax.set_yticks(range(0, int(forecast['yhat'].max()) + 25, 25))
 ax.legend()
+ax.grid(True)
 st.pyplot(fig3)
 
 # ----------------------------------
