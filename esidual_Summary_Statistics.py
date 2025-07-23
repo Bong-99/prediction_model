@@ -49,23 +49,14 @@ st.pyplot(fig1)
 st.subheader("📊 Forecast Components")
 
 # 두 번째: Custom Seasonality (sunspot_cycle)
-# Trend
-fig_trend, ax1 = plt.subplots(figsize=(10, 3))
-ax1.plot(forecast["ds"], forecast["trend"], color='blue')
-ax1.set_title("Trend")
-ax1.set_xlabel("Date")
-ax1.set_ylabel("Trend")
-ax1.grid(True)
-st.pyplot(fig_trend)
-
-# Sunspot Cycle Seasonality
-fig_seasonal, ax2 = plt.subplots(figsize=(10, 3))
-ax2.plot(forecast["ds"], forecast["sunspot_cycle"], color='green')
-ax2.set_title("Sunspot Cycle Seasonality (11-year)")
-ax2.set_xlabel("Date")
-ax2.set_ylabel("Seasonal Effect")
-ax2.grid(True)
-st.pyplot(fig_seasonal)
+fig_cycle, ax_cycle = plt.subplots(figsize=(10, 3))
+component = forecast[['ds', 'sunspot_cycle']]
+ax_cycle.plot(component['ds'], component['sunspot_cycle'], color='green')
+ax_cycle.set_title("Custom Seasonality: Sunspot Cycle")
+ax_cycle.set_xlabel("Date")
+ax_cycle.set_ylabel("Effect")
+ax_cycle.grid(True)
+st.pyplot(fig_cycle)
 # ----------------------------------
 # [5] 컨스텀 시각화: 실제값 vs 예측값 + 신력관
 # ----------------------------------
