@@ -31,6 +31,7 @@ model = Prophet(
 model.add_seasonality(name='sunspot_cycle', period=11, fourier_order=5)
 model.fit(df)
 
+model.seasonalities.pop('yearly', None)
 # ----------------------------------
 # [3] 예측 수행
 # ----------------------------------
@@ -85,9 +86,6 @@ ax2.axhline(0, color='black', linestyle='--', linewidth=1)
 ax2.set_title("Residuals Analysis (Actual-Predicted)")
 ax2.set_xlabel("Year")
 ax2.set_ylabel("Residual")
-ax2.set_yticks(range(int(merged["residual"].min()),
-                     int(merged["residual"].max()),
-                     25))
 ax2.grid(True)
 ax2.legend()
 st.pyplot(fig4)
