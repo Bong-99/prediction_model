@@ -17,7 +17,7 @@ st.title("🌞 Prophet Forecast with Preprocessed Sunspot Data")
 df = pd.read_csv("data/sunspots_for_prophet.csv")
 df['ds'] = pd.to_datetime(df['ds'])
 
-st.subheader("📄 불러온 데이터 미리보기")
+st.subheader("📄 데이터 미리보기")
 st.dataframe(df.head())
 
 # ----------------------------------
@@ -40,8 +40,13 @@ st.subheader("📈 Prophet Forecast Plot")
 fig1 = model.plot(forecast)
 st.pyplot(fig1)
 
+# 연간 성분 제거를 위해 'yearly' 컴포넌트를 필터링
 st.subheader("📊 Forecast Components")
 fig2 = model.plot_components(forecast)
+axes = fig2.get_axes()
+for ax in axes:
+    if 'yearly' in ax.get_title().lower():
+        ax.remove()
 st.pyplot(fig2)
 
 # ----------------------------------
@@ -50,13 +55,14 @@ st.pyplot(fig2)
 st.subheader("📉 Custom Plot: Actual vs Predicted with Prediction Intervals")
 
 fig3, ax = plt.subplots(figsize=(14, 6))
-ax.plot(df["ds"], df["y"], label="Actual", color='blue',marker='o')
-ax.plot(forecast["ds"], forecast["yhat"], llabel='Predicted', color='red',linestyle='--')
+ax.plot(df["ds"], df["y"], label="Actual", color='black')
+ax.plot(forecast["ds"], forecast["yhat"], label="Forecast", color='blue')
 ax.fill_between(forecast["ds"], forecast["yhat_lower"], forecast["yhat_upper"],
-                 color='red', alpha=0.1, label="Prediction Interval")
-ax.set_title("Sunspots: Actual vs. Predicted with Prediction Intervals")
+                 color='blue', alpha=0.3, label="Confidence Interval")
+ax.set_title("Actual vs Forecast with Confidence Interval")
 ax.set_xlabel("Year")
 ax.set_ylabel("Sunspot Count")
+ax.set_yticks(range(0, int(forecast['yhat'].max()) + 25, 25))
 ax.legend()
 st.pyplot(fig3)
 
@@ -69,13 +75,12 @@ merged = pd.merge(df, forecast[['ds', 'yhat']], on='ds', how='left')
 merged['residual'] = merged['y'] - merged['yhat']
 
 fig4, ax2 = plt.subplots(figsize=(14, 4))
-ax2.plot(merged["ds"], merged["residual"], label="Residuals", color='purple',marker='o')
+ax2.plot(merged["ds"], merged["residual"], label="Residuals", color='purple')
 ax2.axhline(0, color='black', linestyle='--', linewidth=1)
-ax2.set_title("Residual Analysis (Actual - Predicted)")
+ax2.set_title("Residuals Over Time")
 ax2.set_xlabel("Year")
 ax2.set_ylabel("Residual")
 ax2.legend()
-ax2.grid(True)
 st.pyplot(fig4)
 
 # ----------------------------------
