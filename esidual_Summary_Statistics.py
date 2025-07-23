@@ -23,7 +23,11 @@ st.dataframe(df.head())
 # ----------------------------------
 # [2] Prophet 모델 정의 및 학습
 # ----------------------------------
-model = Prophet(yearly_seasonality=False,weekly_seasonality=False)
+model = Prophet(
+    yearly_seasonality=False,
+    weekly_seasonality=False,
+    daily_seasonality=False
+)
 model.add_seasonality(name='sunspot_cycle', period=11, fourier_order=5)
 model.fit(df)
 
