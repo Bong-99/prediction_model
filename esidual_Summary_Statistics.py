@@ -55,8 +55,8 @@ st.pyplot(fig2)
 st.subheader("📉 Custom Plot: Actual vs Predicted with Prediction Intervals")
 
 fig3, ax = plt.subplots(figsize=(14, 6))
-ax.plot(df["ds"], df["y"], label="Actual", color='blue')
-ax.plot(forecast["ds"], forecast["yhat"], label="Predicted", color='red',linestyle='--',marker='o')
+ax.plot(df["ds"], df["y"], label="Actual", color='blue',marker='o')
+ax.plot(forecast["ds"], forecast["yhat"], label="Predicted", color='red',linestyle='--')
 ax.fill_between(forecast["ds"], forecast["yhat_lower"], forecast["yhat_upper"],
                  color='red', alpha=0.1, label="Prediction Interval")
 ax.set_title("Sunspots: Actual vs Predicted with Prediction Intervals")
@@ -76,11 +76,12 @@ merged = pd.merge(df, forecast[['ds', 'yhat']], on='ds', how='left')
 merged['residual'] = merged['y'] - merged['yhat']
 
 fig4, ax2 = plt.subplots(figsize=(14, 4))
-ax2.plot(merged["ds"], merged["residual"], label="Residuals", color='purple')
+ax2.plot(merged["ds"], merged["residual"], label="Residuals", color='purple',marker='o')
 ax2.axhline(0, color='black', linestyle='--', linewidth=1)
 ax2.set_title("Residuals Analysis (Actual-Predicted)")
 ax2.set_xlabel("Year")
 ax2.set_ylabel("Residual")
+axw.grid(True)
 ax2.legend()
 st.pyplot(fig4)
 
