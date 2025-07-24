@@ -47,25 +47,8 @@ st.pyplot(fig1)
 
 # 연간 성분 제거를 위해 'yearly' 컴포넌트를 필터링
 st.subheader("📊 Forecast Components")
-
-# 두 번째: Custom Seasonality (sunspot_cycle)
-# ✅ 추가: Trend 시각화
-fig_trend, ax_trend = plt.subplots(figsize=(10, 3))
-ax_trend.plot(forecast['ds'], forecast['trend'], color='blue')
-ax_trend.set_title("Trend")
-ax_trend.set_xlabel("Date")
-ax_trend.set_ylabel("Trend")
-ax_trend.grid(True)
-st.pyplot(fig_trend)
-
-# ✅ 유지: sunspot_cycle 시각화
-fig_cycle, ax_cycle = plt.subplots(figsize=(10, 3))
-ax_cycle.plot(forecast['ds'], forecast['sunspot_cycle'], color='blue')
-ax_cycle.set_title("Custom Seasonality: Sunspot Cycle")
-ax_cycle.set_xlabel("Date")
-ax_cycle.set_ylabel("Effect")
-ax_cycle.grid(True)
-st.pyplot(fig_cycle)
+fig2 = model.plot_components(forecast)
+st.pyplot(fig2)
 
 # ----------------------------------
 # [5] 컨스텀 시각화: 실제값 vs 예측값 + 신력관
