@@ -70,7 +70,7 @@ st.pyplot(fig3)
 # ----------------------------------
 # [6] 잔차 반응 시각화
 # ----------------------------------
-st.subheader("📉 Residual Analysis (예측 오차 반응)")
+st.subheader("📉 Residual Analysis (예측 오차 분석)")
 
 merged = pd.merge(df, forecast[['ds', 'yhat']], on='ds', how='left')
 merged['residual'] = merged['y'] - merged['yhat']
